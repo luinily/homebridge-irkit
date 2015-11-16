@@ -17,7 +17,6 @@
             "irkit_url": "http://irkitxxxxx.local/messages",
             "on_form": {"format":"raw","freq":38,"data":[]},
             "off_form": {"format":"raw","freq":38,"data":[]},
-            "http_method": "POST",
         }
     ]
 }
