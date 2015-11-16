@@ -42,6 +42,7 @@ HttpAccessory.prototype = {
 			form = this.off_form;
 			this.log("Setting power state to off");
 		}
+		this.log(form);
 
 		this.httpRequest(this.irkit_url, form, this.http_method, function(error, response, responseBody) {
 			if (error) {
