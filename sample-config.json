@@ -13,11 +13,10 @@
     "accessories": [
         {
             "accessory": "Http",
-            "name": "Kitchen Lamp",
-            "on_url": "https://192.168.1.22:3030/devices/23222/on",
-            "on_body": "{\"state\":\"On\"}",
-            "off_url": "https://192.168.1.22:3030/devices/23222/off",
-            "off_body": "{\"state\":\"Off\"}",
+            "name": "irkit control",
+            "irkit_url": "http://irkitxxxxx.local/messages",
+            "on_form": {"format":"raw","freq":38,"data":[]},
+            "off_form": {"format":"raw","freq":38,"data":[]},
             "http_method": "POST",
         }
     ]

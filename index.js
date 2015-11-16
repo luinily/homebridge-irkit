@@ -12,20 +12,19 @@ function HttpAccessory(log, config) {
 	this.log = log;
 
 	// url info
-	this.on_url    = config["on_url"];
-	this.on_body   = config["on_body"];
-	this.off_url   = config["off_url"];
-	this.off_body  = config["off_body"];
+	this.irkit_url    = config["irkit_url"];
+	this.on_form   = config["on_form"];
+	this.off_form  = config["off_form"];
 	this.http_method = config["http_method"];
 	this.name = config["name"];
 }
 
 HttpAccessory.prototype = {
 
-	httpRequest: function(url, body, method, callback) {
+	httpRequest: function(url, form, method, callback) {
 		request({
 				url: url,
-				body: body,
+				form: form,
 				method: method,
 			},
 			function(error, response, body) {
@@ -34,20 +33,17 @@ HttpAccessory.prototype = {
 	},
 
 	setPowerState: function(powerOn, callback) {
-		var url;
-		var body;
+		var form;
 
 		if (powerOn) {
-			url = this.on_url;
-			body = this.on_body;
+			form = this.on_form;
 			this.log("Setting power state to on");
 		} else {
-			url = this.off_url;
-			body = this.off_body;
+			form = this.off_form;
 			this.log("Setting power state to off");
 		}
 
-		this.httpRequest(url, body, this.http_method, function(error, response, responseBody) {
+		this.httpRequest(this.irkit_url, form, this.http_method, function(error, response, responseBody) {
 			if (error) {
 				this.log('HTTP power function failed: %s', error.message);
 				callback(error);
