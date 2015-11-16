@@ -24,7 +24,7 @@ HttpAccessory.prototype = {
 		request({
 				url: url,
 				method: 'POST',
-				encoding: null,
+				encoding: 'utf8',
 				form: form
 			},
 			function(error, response, body) {
