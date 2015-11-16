@@ -24,7 +24,7 @@ HttpAccessory.prototype = {
 		request({
 				url: url,
 				method: 'POST',
-				form: form
+				form: {message: form}
 			},
 			function(error, response, body) {
 				callback(error, response, body)
