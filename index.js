@@ -21,8 +21,9 @@ function HttpAccessory(log, config) {
 HttpAccessory.prototype = {
 
 	httpRequest: function(url, form, callback) {
-		request.post({
+		request({
 				url: url,
+				method: 'POST',
 				form: form
 			},
 			function(error, response, body) {
