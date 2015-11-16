@@ -18,13 +18,7 @@
             "on_body": "{\"state\":\"On\"}",
             "off_url": "https://192.168.1.22:3030/devices/23222/off",
             "off_body": "{\"state\":\"Off\"}",
-            "brightness_url": "https://192.168.1.22:3030/devices/23222/brightness/%b",
-			"username": "",
-			"password": "",
-			"sendimmediately": "",
             "http_method": "POST",
-			"service": "Switch",
-			"brightnessHandling": "no"
         }
     ]
 }

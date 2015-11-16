@@ -16,28 +16,17 @@ function HttpAccessory(log, config) {
 	this.on_body   = config["on_body"];
 	this.off_url   = config["off_url"];
 	this.off_body  = config["off_body"];
-	this.brightness_url = config["brightness_url"];
 	this.http_method = config["http_method"];
-	this.username = config["username"];
-	this.password = config["password"];
-	this.sendimmediately = config["sendimmediately"];
-	this.service = config["service"] || "Switch";
 	this.name = config["name"];
-	this.brightnessHandling = config["brightnessHandling"] || "no";
 }
 
 HttpAccessory.prototype = {
 
-	httpRequest: function(url, body, method, username, password, sendimmediately, callback) {
+	httpRequest: function(url, body, method, callback) {
 		request({
 				url: url,
 				body: body,
 				method: method,
-				auth: {
-					user: username,
-					pass: password,
-					sendImmediately: sendimmediately
-				}
 			},
 			function(error, response, body) {
 				callback(error, response, body)
@@ -58,7 +47,7 @@ HttpAccessory.prototype = {
 			this.log("Setting power state to off");
 		}
 
-		this.httpRequest(url, body, this.http_method, this.username, this.password, this.sendimmediately, function(error, response, responseBody) {
+		this.httpRequest(url, body, this.http_method, function(error, response, responseBody) {
 			if (error) {
 				this.log('HTTP power function failed: %s', error.message);
 				callback(error);
@@ -67,22 +56,6 @@ HttpAccessory.prototype = {
 				this.log(response);
 				this.log(responseBody);
 	
-				callback();
-			}
-		}.bind(this));
-	},
-
-	setBrightness: function(level, callback) {
-		var url = this.brightness_url.replace("%b", level)
-
-		this.log("Setting brightness to %s", level);
-
-		this.httpRequest(url, "", this.http_method, this.username, this.password, this.sendimmediately, function(error, response, body) {
-			if (error) {
-				this.log('HTTP brightness function failed: %s', error);
-				callback(error);
-			} else {
-				this.log('HTTP brightness function succeeded!');
 				callback();
 			}
 		}.bind(this));
@@ -104,29 +77,12 @@ HttpAccessory.prototype = {
 			.setCharacteristic(Characteristic.Model, "HTTP Model")
 			.setCharacteristic(Characteristic.SerialNumber, "HTTP Serial Number");
 
-		if (this.service == "Switch") {
-			var switchService = new Service.Switch(this.name);
+		var switchService = new Service.Switch(this.name);
 
-			switchService
-				.getCharacteristic(Characteristic.On)
-				.on('set', this.setPowerState.bind(this));
+		switchService
+			.getCharacteristic(Characteristic.On)
+			.on('set', this.setPowerState.bind(this));
 
-			return [switchService];
-		} else if (this.service == "Light") {
-			var lightbulbService = new Service.Lightbulb(this.name);
-
-			lightbulbService
-				.getCharacteristic(Characteristic.On)
-				.on('set', this.setPowerState.bind(this));
-
-			if (this.brightnessHandling == "yes") {
-
-				lightbulbService
-					.addCharacteristic(new Characteristic.Brightness())
-					.on('set', this.setBrightness.bind(this));
-			}
-
-			return [informationService, lightbulbService];
-		}
+		return [switchService];
 	}
 };
