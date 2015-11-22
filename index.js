@@ -44,11 +44,11 @@ IRKitAccessory.prototype = {
 
 		this.httpRequest(this.irkit_url, form, function(error, response, responseBody) {
 			if (error) {
-				this.log('HTTP power function failed: %s', error.message);
+				this.log('IRKit power function failed: %s', error.message);
 				this.log(response);
 				callback(error);
 			} else {
-				this.log('HTTP power function succeeded!');
+				this.log('IRKit power function succeeded!');
 	
 				callback();
 			}
