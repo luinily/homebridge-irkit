@@ -1,7 +1,7 @@
 {
-  "name": "homebridge-http",
-  "version": "0.0.2",
-  "description": "https plugin for homebridge: https://github.com/nfarina/homebridge",
+  "name": "homebridge-irkit",
+  "version": "0.0.1",
+  "description": "irkit plugin for homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
     "homebridge-plugin"

@@ -4,11 +4,11 @@ var request = require("request");
 module.exports = function(homebridge){
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory("homebridge-http", "Http", HttpAccessory);
+  homebridge.registerAccessory("homebridge-irkit", "IRKit", IRKitAccessory);
 }
 
 
-function HttpAccessory(log, config) {
+function IRKitAccessory(log, config) {
 	this.log = log;
 
 	// url info
@@ -18,7 +18,7 @@ function HttpAccessory(log, config) {
 	this.name = config["name"];
 }
 
-HttpAccessory.prototype = {
+IRKitAccessory.prototype = {
 
 	httpRequest: function(url, form, callback) {
 		request({
@@ -67,9 +67,9 @@ HttpAccessory.prototype = {
 		var informationService = new Service.AccessoryInformation();
 
 		informationService
-			.setCharacteristic(Characteristic.Manufacturer, "HTTP Manufacturer")
-			.setCharacteristic(Characteristic.Model, "HTTP Model")
-			.setCharacteristic(Characteristic.SerialNumber, "HTTP Serial Number");
+			.setCharacteristic(Characteristic.Manufacturer, "IRKit Manufacturer")
+			.setCharacteristic(Characteristic.Model, "IRKit Model")
+			.setCharacteristic(Characteristic.SerialNumber, "IRKit Serial Number");
 
 		var switchService = new Service.Switch(this.name);
 

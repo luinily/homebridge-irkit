@@ -21,7 +21,7 @@ Configuration sample:
  ```
 "accessories": [
         {
-            "accessory": "Http",
+            "accessory": "IRKit",
             "name": "irkit control device",
             "irkit_url": "http://irkitxxxxx.local/messages",
             "on_form": {"format":"raw","freq":38,"data":[]},
