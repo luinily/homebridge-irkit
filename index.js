@@ -12,7 +12,7 @@ function IRKitAccessory(log, config) {
 	this.log = log;
 
 	// url info
-	this.irkit_url    = config["irkit_url"];
+	this.irkit_url = config["irkit_url"];
 	this.on_form   = config["on_form"];
 	this.off_form  = config["off_form"];
 	this.name = config["name"];
@@ -24,6 +24,7 @@ IRKitAccessory.prototype = {
 		request({
 				url: url,
 				method: 'POST',
+				headers: {'X-Requested-With': 'curl'},
 				form: JSON.stringify(form)
 			},
 			function(error, response, body) {
