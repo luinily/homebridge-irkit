@@ -45,12 +45,12 @@ IRKitAccessory.prototype = {
 
 		this.httpRequest(this.irkit_url, form, function(error, response, responseBody) {
 			if (!error && response.statusCode == 200) {
-                this.log('IRKit power function succeeded!');
+                		this.log('IRKit power function succeeded!');
 	
 				callback();
 			} else {
-                this.log(response);
-                this.log('IRKit power function failed!');
+                		this.log(response);
+                		this.log('IRKit power function failed!');
                 
 				callback(error);
 			}
