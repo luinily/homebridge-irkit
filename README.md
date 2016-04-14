@@ -28,3 +28,7 @@ Configuration sample:
     ]
 
 ```
+
+# Attention
+If infrared is too long, IRKit may error.  
+IRKit に送る赤外線情報が長い場合、エラーになるので注意。
