@@ -16,6 +16,7 @@ function IRKitAccessory(log, config) {
 	this.on_form   = config["on_form"];
 	this.off_form  = config["off_form"];
 	this.name = config["name"];
+    this.service = config["service"] || "Switch";
 }
 
 IRKitAccessory.prototype = {
@@ -73,12 +74,23 @@ IRKitAccessory.prototype = {
 			.setCharacteristic(Characteristic.Model, "IRKit Model")
 			.setCharacteristic(Characteristic.SerialNumber, "IRKit Serial Number");
 
-		var switchService = new Service.Switch(this.name);
+        if (this.service == "Switch") {
+				var switchService = new Service.Switch(this.name);
+				
+				switchService
+				    .getCharacteristic(Characteristic.On)
+				    .on('set', this.setPowerState.bind(this));
 
-		switchService
-			.getCharacteristic(Characteristic.On)
-			.on('set', this.setPowerState.bind(this));
+				return [switchService];
 
-		return [switchService];
+        } else if (this.service == "Light") {
+				var lightbulbService = new Service.Lightbulb(this.name);
+
+			    lightbulbService
+			    	.getCharacteristic(Characteristic.On)
+			    	.on('set', this.setPowerState.bind(this));
+
+			    return [informationService, lightbulbService];
+        }
 	}
 };
