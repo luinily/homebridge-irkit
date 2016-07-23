@@ -13,8 +13,8 @@
     "accessories": [
         {
             "accessory": "IRKit",
-            "name": "irkit control",
-            "irkit_url": "http://irkitxxxxx.local/messages",
+            "name": "irkit control device",
+            "irkit_host": "irkitxxxxx.local",
             "on_form": {"format":"raw","freq":38,"data":[]},
             "off_form": {"format":"raw","freq":38,"data":[]},
         }
