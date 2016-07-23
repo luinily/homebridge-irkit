@@ -1,5 +1,5 @@
 var Service, Characteristic;
-var request = require("request");
+var http = require("http");
 
 module.exports = function (homebridge) {
 	Service = homebridge.hap.Service;
@@ -12,7 +12,7 @@ function IRKitAccessory(log, config) {
 	this.log = log;
 
 	// url info
-	this.irkit_url = config["irkit_url"];
+	this.irkit_host = config["irkit_host"];
 	this.on_form = config["on_form"];
 	this.off_form = config["off_form"];
 	this.name = config["name"];
@@ -20,16 +20,25 @@ function IRKitAccessory(log, config) {
 
 IRKitAccessory.prototype = {
 
-	httpRequest: function (url, form, callback) {
-		request({
-			url: url,
-			method: 'POST',
-			headers: { 'X-Requested-With': 'curl' },
-			form: JSON.stringify(form)
-		},
-			function (error, response, body) {
-				callback(error, response, body)
-			})
+	httpRequest: function (host, form, callback) {
+		var formData = JSON.stringify(form);
+		var req = http.request({
+			host: host,
+			path: "/messages",
+			method: "POST",
+			headers: {
+				"X-Requested-With": "homebridge-irkit",
+				"Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+				"Content-Length": formData.length
+			}
+		}, function (response) {
+			callback(response);
+		});
+		req.on('error', function (response) {
+			callback(response);
+		});
+		req.write(formData);
+		req.end();
 	},
 
 	setPowerState: function (powerOn, callback) {
@@ -43,16 +52,16 @@ IRKitAccessory.prototype = {
 			this.log("Setting power state to off");
 		}
 
-		this.httpRequest(this.irkit_url, form, function (error, response, responseBody) {
-			if (!error && response.statusCode == 200) {
+		this.httpRequest(this.irkit_host, form, function (response) {
+			if (response.statusCode == 200) {
 				this.log('IRKit power function succeeded!');
 
 				callback();
 			} else {
-				this.log(response);
+				this.log(response.message);
 				this.log('IRKit power function failed!');
 
-				callback(error);
+				callback('error');
 			}
 		}.bind(this));
 	},

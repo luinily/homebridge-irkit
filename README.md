@@ -21,14 +21,10 @@ Configuration sample:
         {
             "accessory": "IRKit",
             "name": "irkit control device",
-            "irkit_url": "http://irkitxxxxx.local/messages",
+            "irkit_host": "irkitxxxxx.local",
             "on_form": {"format":"raw","freq":38,"data":[]},
             "off_form": {"format":"raw","freq":38,"data":[]}
         }
     ]
 
 ```
-
-# Attention
-If infrared is too long, IRKit may error.  
-IRKit に送る赤外線情報が長い場合、エラーになるので注意。
