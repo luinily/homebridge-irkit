@@ -1,10 +1,10 @@
 var Service, Characteristic;
 var request = require("request");
 
-module.exports = function(homebridge){
-  Service = homebridge.hap.Service;
-  Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory("homebridge-irkit", "IRKit", IRKitAccessory);
+module.exports = function (homebridge) {
+	Service = homebridge.hap.Service;
+	Characteristic = homebridge.hap.Characteristic;
+	homebridge.registerAccessory("homebridge-irkit", "IRKit", IRKitAccessory);
 }
 
 
@@ -13,26 +13,26 @@ function IRKitAccessory(log, config) {
 
 	// url info
 	this.irkit_url = config["irkit_url"];
-	this.on_form   = config["on_form"];
-	this.off_form  = config["off_form"];
+	this.on_form = config["on_form"];
+	this.off_form = config["off_form"];
 	this.name = config["name"];
 }
 
 IRKitAccessory.prototype = {
 
-	httpRequest: function(url, form, callback) {
+	httpRequest: function (url, form, callback) {
 		request({
-				url: url,
-				method: 'POST',
-				headers: {'X-Requested-With': 'curl'},
-				form: JSON.stringify(form)
-			},
-			function(error, response, body) {
+			url: url,
+			method: 'POST',
+			headers: { 'X-Requested-With': 'curl' },
+			form: JSON.stringify(form)
+		},
+			function (error, response, body) {
 				callback(error, response, body)
 			})
 	},
 
-	setPowerState: function(powerOn, callback) {
+	setPowerState: function (powerOn, callback) {
 		var form;
 
 		if (powerOn) {
@@ -43,26 +43,26 @@ IRKitAccessory.prototype = {
 			this.log("Setting power state to off");
 		}
 
-		this.httpRequest(this.irkit_url, form, function(error, response, responseBody) {
+		this.httpRequest(this.irkit_url, form, function (error, response, responseBody) {
 			if (!error && response.statusCode == 200) {
-                		this.log('IRKit power function succeeded!');
-                        
-                        callback();
+				this.log('IRKit power function succeeded!');
+
+				callback();
 			} else {
-                		this.log(response);
-                		this.log('IRKit power function failed!');
-                        
-                        callback(error);
+				this.log(response);
+				this.log('IRKit power function failed!');
+
+				callback(error);
 			}
 		}.bind(this));
 	},
 
-	identify: function(callback) {
+	identify: function (callback) {
 		this.log("Identify requested!");
 		callback(); // success
 	},
 
-	getServices: function() {
+	getServices: function () {
 
 		// you can OPTIONALLY create an information service if you wish to override
 		// the default values for things like serial number, model, etc.
