@@ -1,10 +1,13 @@
 # homebridge-irkit
 
 Supports IRKit on HomeBridge Platform.  
+
 Fork from homebridge-irkit (https://github.com/senyoltw/homebridge-irkit/)
+
 Used radio-button like implementation by homebridge-switcheroo (https://github.com/chriszelazo/homebridge-switcheroo)
 
 On/Off for IR devices
+
 Radio-button like option for IR device with multiple states
 
 IRKit HomePage  
@@ -24,7 +27,7 @@ Configuration sample:
 "accessories": [
       {
           "accessory": "IRKit",
-          "name": "irkit control device on off",
+          "name": "irkit control device simple",
           "irkit_host": "irkitxxxxx.local",
           "type": "simple",
           "on_form": {"format":"raw","freq":38,"data":[]},
