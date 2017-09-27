@@ -1,6 +1,6 @@
 {
-  "name": "homebridge-irkit",
-  "version": "0.0.5",
+  "name": "homebridge-irkitExtended",
+  "version": "0.0.1",
   "description": "irkit plugin for homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
@@ -11,10 +11,10 @@
     "homebridge": ">=0.2.0"
   },
   "author": {
-    "name": "senyoltw"
+    "name": "luinily"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:senyoltw/homebridge-irkit.git"
+    "url": "git@github.com:luinily/homebridge-irkitExtended.git"
   }
 }

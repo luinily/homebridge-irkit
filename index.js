@@ -1,6 +1,8 @@
 var Service;
 var Characteristic;
 var http = require("http");
+var simpleType = "simple"
+var multiType = "multiple"
 
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
@@ -20,12 +22,12 @@ function IRKitAccessory(log, config) {
     this.type = config.type;
 
     switch (this.type) {
-    case "switch":
+    case simpleType:
         this.on_form = config.on_form;
         this.off_form = config.off_form;
         break;
-    case "multiswitch":
-        this.multiswitch = config.multiswitch;
+    case multiType:
+        this.multiple = config.multiple;
         break;
     default:
         throw new Error("Unknown homebridge-homekit switch type");
@@ -66,7 +68,7 @@ IRKitAccessory.prototype = {
 
         var form;
         switch (this.type) {
-        case "switch":
+        case simpleType:
             if (powerOn) {
                 form = this.on_form;
                 this.log("Setting power state to on");
@@ -75,15 +77,15 @@ IRKitAccessory.prototype = {
                 this.log("Setting power state to off");
             }
             break;
-        case "multiswitch":
+        case multiType:
             this.services.forEach(function (switchService, i) {
                 if (i === 0) {
                     return; // skip informationService at index 0
                 }
 
                 if (targetService.subtype === switchService.subtype) { // turn on
-                    form = this.multiswitch[i - 1].form;
-                    this.log(">>>>>>>> " + this.multiswitch[i - 1].name)
+                    form = this.multiple[i - 1].form;
+                    this.log(">>>>>>>> " + this.multiple[i - 1].name)
                     switchService.getCharacteristic(Characteristic.On).setValue(true, undefined, funcContext);
                 } else { // turn off
                     switchService.getCharacteristic(Characteristic.On).setValue(false, undefined, funcContext);
@@ -94,7 +96,6 @@ IRKitAccessory.prototype = {
 
 
         this.httpRequest(this.irkit_host, form, function (response) {
-            this.log(form)
             if (response.statusCode == 200) {
                 this.log('IRKit power function succeeded!');
 
@@ -127,7 +128,7 @@ IRKitAccessory.prototype = {
         this.services.push(informationService);
 
         switch (this.type) {
-        case "switch":
+        case simpleType:
             var switchService = new Service.Switch(this.name);
 
             switchService
@@ -135,14 +136,14 @@ IRKitAccessory.prototype = {
                 .on("set", this.setPowerState.bind(this, switchService));
             this.services.push(switchService)
             break;
-        case "multiswitch":
-            this.log("[Multiswitch]: " + this.name);
-            this.multiswitch.forEach(function (switchItem, i) {
+        case multiType:
+            this.log("[Multiple]: " + this.name);
+            this.multiple.forEach(function (switchItem, i) {
                 switch (i) {
                 case 0:
                     this.log("---+--- " + switchItem.name);
                     break;
-                case this.multiswitch.length - 1:
+                case this.multiple.length - 1:
                     this.log("   +--- " + switchItem.name);
                     break;
                 default:
