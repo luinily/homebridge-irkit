@@ -17,7 +17,7 @@ http://getirkit.com/
 // not published yet
 1. Install homebridge using: sudo npm install -g homebridge
 2. Install this plugin using: sudo npm install -g homebridge-irkitExtended
-3. Update your configuration file. See sample-config.json in this repository for a sample. 
+3. Update your configuration file. See sample-config.json in this repository for a sample.
 
 # Configuration
 
@@ -26,7 +26,7 @@ Configuration sample:
  ```
 "accessories": [
       {
-          "accessory": "IRKit",
+          "accessory": "IRKitExt",
           "name": "irkit control device simple",
           "irkit_host": "irkitxxxxx.local",
           "type": "simple",
