@@ -1,4 +1,4 @@
-# homebridge-irkit
+# homebridge-irkitExtended
 
 Supports IRKit on HomeBridge Platform.  
 
