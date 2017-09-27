@@ -5,18 +5,43 @@
         "port": 51826,
         "pin": "031-45-156"
     },
-    
+
     "description": "The Onion!",
 
     "platforms": [],
 
     "accessories": [
-        {
-            "accessory": "IRKit",
-            "name": "irkit control device",
-            "irkit_host": "irkitxxxxx.local",
-            "on_form": {"format":"raw","freq":38,"data":[]},
-            "off_form": {"format":"raw","freq":38,"data":[]},
-        }
-    ]
+          {
+              "accessory": "IRKitExt",
+              "name": "irkit control device simple",
+              "irkit_host": "irkitxxxxx.local",
+              "type": "simple",
+              "on_form": {"format":"raw","freq":38,"data":[]},
+    			       "off_form":{"format":"raw","freq":38,"data":[]}
+          },
+          {
+              "accessory": "IRKitExt",
+              "name": "irkit control device multistate",
+              "irkit_host": "irkitxxxxx.local",
+              "type": "multiple",
+              "multiple": [
+                {
+                    "name" : "Off",
+                    "form":  {"format":"raw","freq":38,"data":[]}
+                },
+                {
+                    "name" : "Low",
+                    "form":  {"format":"raw","freq":38,"data":[]}
+                },
+                {
+                    "name" : "Medium",
+                    "form": {"format":"raw","freq":38,"data":[]}
+                },
+                {
+                    "name" : "High",
+                    "form": {"format":"raw","freq":38,"data":[]}
+                }
+              ]
+          }
+        ]
 }
