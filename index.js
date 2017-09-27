@@ -7,7 +7,7 @@ var multiType = "multiple"
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
-    homebridge.registerAccessory("homebridge-irkit2", "IRKit", IRKitAccessory);
+    homebridge.registerAccessory("homebridge-irkitExt", "IRKitExt", IRKitAccessory);
 };
 
 
