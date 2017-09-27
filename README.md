@@ -34,7 +34,7 @@ Configuration sample:
 			       "off_form":{"format":"raw","freq":38,"data":[]}
       },
       {
-          "accessory": "IRKit",
+          "accessory": "IRKitExt",
           "name": "irkit control device multistate",
           "irkit_host": "irkitxxxxx.local",
           "type": "multiple",
