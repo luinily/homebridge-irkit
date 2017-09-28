@@ -5,6 +5,7 @@ Supports IRKit on HomeBridge Platform.  
 Fork from homebridge-irkit (https://github.com/senyoltw/homebridge-irkit/)
 
 Used radio-button like implementation by homebridge-switcheroo (https://github.com/chriszelazo/homebridge-switcheroo)
+When one of the radio buttons is set to off, the button name "OFF" will be put to on.
 
 On/Off for IR devices
 
@@ -39,8 +40,8 @@ Configuration sample:
           "type": "multiple",
           "multiple": [
             {
-                "name" : "Off",
-                "form":  {"format":"raw","freq":38,"data":[]}
+                "name" : "Off", //this button will be put to on when one of the buttons will be put to off
+                "form":  {"format":"raw","freq":38,"data":[]}
             },
             {
                 "name" : "Low",
