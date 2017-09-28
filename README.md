@@ -8,14 +8,14 @@ Used radio-button like implementation by homebridge-switcheroo (https://github.c
 
 On/Off for IR devices
 
-Radio-button like option for IR device with multiple states
+Radio-button like option for IR devices with multiple states
 
 IRKit HomePage  
 http://getirkit.com/  
 
 # Installation
 1. Install homebridge using: sudo npm install -g homebridge
-2. Install this plugin using: sudo npm install -g homebridge-irkitExtended
+2. Install this plugin using: sudo npm install -g homebridge-irkitextended
 3. Update your configuration file. See sample-config.json in this repository for a sample.
 
 # Configuration
