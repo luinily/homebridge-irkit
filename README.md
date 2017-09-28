@@ -8,7 +8,7 @@ Used radio-button like implementation by homebridge-switcheroo (https://github.c
 
 On/Off for IR devices
 
-Radio-button like option for IR device with multiple states
+Radio-button like option for IR devices with multiple states
 
 IRKit HomePage  
 http://getirkit.com/  
