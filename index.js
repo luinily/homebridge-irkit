@@ -79,22 +79,31 @@ IRKitAccessory.prototype = {
             break;
         case multiType:
             this.services.forEach(function (switchService, i) {
-                if (i === 0) {
-                    return; // skip informationService at index 0
-                }
-
-                if (targetService.subtype === switchService.subtype) { // turn on
-                    form = this.multiple[i - 1].form;
-                    this.log(">>>>>>>> " + this.multiple[i - 1].name)
-                    switchService.getCharacteristic(Characteristic.On).setValue(true, undefined, funcContext);
-                } else { // turn off
-                    switchService.getCharacteristic(Characteristic.On).setValue(false, undefined, funcContext);
-                }
+              if (i === 0) {
+                return; // skip informationService at index 0
+              }
+              if (powerOn) {
+                  var condition = targetService.subtype === switchService.subtype
+              } else {
+                  var condition = switchService.subtype === "OFF"
+              }
+              if (condition) { // turn on
+                form = this.multiple[i - 1].form;
+                this.log(">>>>>>>> " + this.multiple[i - 1].name)
+                switchService.getCharacteristic(Characteristic.On).setValue(true, undefined, funcContext);
+              } else { // turn off
+                switchService.getCharacteristic(Characteristic.On).setValue(false, undefined, funcContext);
+              }
             }.bind(this));
             break;
         }
 
-
+        if (typeof form == 'undefined') {
+            if (callback) {
+                callback();
+            }
+            return;
+        }
         this.httpRequest(this.irkit_host, form, function (response) {
             if (response.statusCode == 200) {
                 this.log('IRKit power function succeeded!');
