@@ -1,6 +1,6 @@
 {
   "name": "homebridge-irkitextended",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "irkit plugin for homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
