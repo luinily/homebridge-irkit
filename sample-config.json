@@ -26,19 +26,19 @@
               "type": "multiple",
               "multiple": [
                 {
-                    "name" : "OFF",
+                    "name" : "OFF",
                     "form":  {"format":"raw","freq":38,"data":[]}
                 },
                 {
-                    "name" : "Low",
+                    "name" : "Low",
                     "form":  {"format":"raw","freq":38,"data":[]}
                 },
                 {
-                    "name" : "Medium",
+                    "name" : "Medium",
                     "form": {"format":"raw","freq":38,"data":[]}
                 },
                 {
-                    "name" : "High",
+                    "name" : "High",
                     "form": {"format":"raw","freq":38,"data":[]}
                 }
               ]
