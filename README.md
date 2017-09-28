@@ -5,6 +5,7 @@ Supports IRKit on HomeBridge Platform.  
 Fork from homebridge-irkit (https://github.com/senyoltw/homebridge-irkit/)
 
 Used radio-button like implementation by homebridge-switcheroo (https://github.com/chriszelazo/homebridge-switcheroo)
+
 When one of the radio buttons is set to off, the button name "OFF" will be put to on.
 
 On/Off for IR devices
