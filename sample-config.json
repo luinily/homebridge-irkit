@@ -13,7 +13,7 @@
     "accessories": [
           {
               "accessory": "IRKitExt",
-              "name": "irkit control device simple",
+              "name": "irkit control device simple",
               "irkit_host": "irkitxxxxx.local",
               "type": "simple",
               "on_form": {"format":"raw","freq":38,"data":[]},
@@ -21,7 +21,7 @@
           },
           {
               "accessory": "IRKitExt",
-              "name": "irkit control device multistate",
+              "name": "irkit control device multistate",
               "irkit_host": "irkitxxxxx.local",
               "type": "multiple",
               "multiple": [
