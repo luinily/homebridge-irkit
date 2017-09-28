@@ -41,7 +41,7 @@ Configuration sample:
           "type": "multiple",
           "multiple": [
             {
-                "name" : "Off", //this button will be put to on when one of the buttons will be put to off
+                "name" : "OFF", //this button will be put to on when one of the buttons will be put to off
                 "form":  {"format":"raw","freq":38,"data":[]}
             },
             {
